@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آراء العملاء</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #062170;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 40px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #F5501D;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e04d1c;
+        }
+        .reviews {
+            margin-top: 40px;
+        }
+        .review {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .review h3 {
+            color: #062170;
+        }
+        .review p {
+            color: #333;
+        }
+        .rating {
+            color: #F5501D;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>آراء العملاء</h1>
+        
+        <form id="reviewForm">
+            <label for="name">اسم العميل:</label>
+            <input type="text" id="name" placeholder="أدخل اسمك" required>
+            
+            <label for="rating">التقييم:</label>
+            <select id="rating">
+                <option value="1">⭐ 1</option>
+                <option value="2">⭐ 2</option>
+                <option value="3">⭐ 3</option>
+                <option value="4">⭐ 4</option>
+                <option value="5">⭐ 5</option>
+            </select>
+            
+            <label for="review">رأيك حول المنتج:</label>
+            <textarea id="review" rows="5" placeholder="اكتب رأيك هنا" required></textarea>
+            
+            <button type="submit">إرسال الرأي</button>
+        </form>
+
+        <div class="reviews" id="reviews">
+            <h2>آراء العملاء السابقة:</h2>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // الحصول على البيانات من النموذج
+            const name = document.getElementById('name').value;
+            const rating = document.getElementById('rating').value;
+            const reviewText = document.getElementById('review').value;
+
+            // إنشاء عنصر جديد لعرض الرأي
+            const reviewContainer = document.getElementById('reviews');
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review');
+            
+            reviewElement.innerHTML = `
+                <h3>${name}</h3>
+                <p class="rating">التقييم: ${'⭐'.repeat(rating)}</p>
+                <p>${reviewText}</p>
+            `;
+            
+            // إضافة الرأي الجديد إلى القائمة
+            reviewContainer.appendChild(reviewElement);
+            
+            // إعادة تعيين النموذج بعد الإرسال
+            document.getElementById('reviewForm').reset();
+        });
+    </script>
+
+</body>
+</html>

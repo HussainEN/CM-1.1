@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب نقاط التسوق</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #062170;
+            font-size: 2em;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 1.2em;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #F5501D;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #e04d1c;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            color: #062170;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>حساب نقاط التسوق</h1>
+        <form id="pointsForm">
+            <label for="amount">أدخل إجمالي المبلغ الذي أنفقته (ريال):</label>
+            <input type="number" id="amount" min="0" placeholder="أدخل المبلغ" required>
+            
+            <button type="submit">احسب النقاط</button>
+
+            <div class="result" id="result"></div>
+        </form>
+    </div>
+
+    <script>
+        // دالة لحساب النقاط
+        document.getElementById('pointsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var amount = document.getElementById('amount').value;
+            var points = Math.floor(amount / 10); // كل 10 ريالات = 1 نقطة
+            
+            document.getElementById('result').textContent = "لقد حصلت على " + points + " نقاط!";
+        });
+    </script>
+</body>
+</html>

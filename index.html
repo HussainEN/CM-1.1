@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Market</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>تسوق ذكي وممتع</h1>
+        <img src="Logo.png" alt="شعار Click Market" class="logo">
+    </header>
+    
+    <div class="container">
+
+        <div class="card-container" id="cardContainer">
+            <div class="card">
+                <h2>جميع العروض</h2>
+                <p>أضغط على الزر لإستكشاف عروضنا.</p>
+                <a href="DiscountPage.html" class="btn">أحدث العروض</a>
+            </div>
+            <div class="card">
+                <h2>ابحث عن منتج</h2>
+                <p>من هنا يمكن البحث عن المنتج المحدد لك.</p>
+                <a href="DescriptionPage.html" class="btn">ابحث عن منتج</a>
+            </div>
+            <div class="card">
+                <h2>نقاط التسوق</h2>
+                <p>من هنا يمكن البحث عن المنتج المحدد لك.</p>
+                <a href="PointsPage.html" class="btn">ابحث عن منتج</a>
+            </div>
+            <div class="card">
+                <h2>آراء العملاء</h2>
+                <p>من هنا يمكن البحث عن المنتج المحدد لك.</p>
+                <a href="FeedbackPage.html" class="btn">ابحث عن منتج</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- قائمة التحقق الثابتة مع خانة رفع الملفات -->
+    <div class="checklist">
+        <h2>قائمة التحقق</h2>
+        <ul id="checklistContainer">
+            <li>
+                <label for="item1">قم بإضافة طلباتك</label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- زر متعدد الوظائف -->
+    <div class="multi-function-btn" onclick="toggleSubBtns()">
+        +
+    </div>
+    <div class="sub-btns" id="subBtns">
+
+        <!-- زر لإضافة مهمة -->
+        <div class="sub-btn" onclick="addTask()">
+            <img src="Newest.jpg" alt="إضافة مهمة" style="width: 24px; height: 24px;">
+        </div>
+
+        <!-- زر لحذف المهام -->
+        <div class="sub-btn" onclick="deleteTasks()">
+            <img src="Trash.jpg" alt="حذف المهام" style="width: 24px; height: 24px;">
+        </div>
+    </div>
+
+    <script>
+        // إظهار وإخفاء الأزرار الفرعية
+        function toggleSubBtns() {
+            const subBtns = document.getElementById('subBtns');
+            subBtns.classList.toggle('show');
+        }
+
+        // إضافة مهمة جديدة
+        function addTask() {
+            const taskText = prompt('أدخل المهمة الجديدة:');
+            if (taskText) {
+                const checklistContainer = document.getElementById('checklistContainer');
+                const listItem = document.createElement('li');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                const label = document.createElement('label');
+                label.textContent = taskText;
+
+                listItem.appendChild(checkbox);
+                listItem.appendChild(label);
+                checklistContainer.appendChild(listItem);
+
+                saveChecklistItem(taskText); // حفظ العنصر في Local Storage
+            }
+        }
+
+        // حذف المهام المكتملة
+        function deleteTasks() {
+            const checklistContainer = document.getElementById('checklistContainer');
+            const checkboxes = checklistContainer.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkbox.parentElement.remove();
+                }
+            });
+        }
+
+        // تحميل العناصر المحفوظة من Local Storage عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChecklistItems();
+        });
+
+        // وظيفة قراءة الملف وعرض محتواه في قائمة التحقق وتخزينه في Local Storage
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    const lines = content.split('\n');
+                    const checklistContainer = document.getElementById('checklistContainer');
+                    
+                    lines.forEach((line, index) => {
+                        if (line.trim() !== '') {
+                            const listItem = createChecklistItem(line, index + Date.now());
+                            checklistContainer.appendChild(listItem);
+                            saveChecklistItem(line); // حفظ العنصر في Local Storage
+                        }
+                    });
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // دالة لإنشاء عنصر جديد في قائمة التحقق
+        function createChecklistItem(text, id) {
+            const listItem = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'item' + id;
+
+            const label = document.createElement('label');
+            label.htmlFor = 'item' + id;
+            label.textContent = text;
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(label);
+            return listItem;
+        }
+
+        // حفظ عنصر في Local Storage
+        function saveChecklistItem(itemText) {
+            let checklistItems = JSON.parse(localStorage.getItem('checklistItems')) || [];
+            checklistItems.push(itemText);
+            localStorage.setItem('checklistItems', JSON.stringify(checklistItems));
+        }
+
+        // تحميل العناصر من Local Storage وعرضها في القائمة
+        function loadChecklistItems() {
+            const checklistContainer = document.getElementById('checklistContainer');
+            const checklistItems = JSON.parse(localStorage.getItem('checklistItems')) || [];
+            checklistItems.forEach((itemText, index) => {
+                const listItem = createChecklistItem(itemText, index);
+                checklistContainer.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>

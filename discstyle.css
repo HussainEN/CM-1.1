@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image:image('BG.png');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: contain;
+    color: #ffffff;
+    
+}
+header {
+    background-color: #010A3D;
+    padding: 17px;
+    text-align: center;
+    color: hsl(0, 0%, 100%);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* يعمل على محاذاة المحتوى في المنتصف */
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 20px; /* لتحريك الشعار لليسار */
+    top:7px;
+    width: 120px;
+    height: auto;
+    border-radius: 14px;
+}
+
+h2 {
+    color: #010A3D;
+    font-size: 2.5em;
+    text-align: center;
+}
+h1 {
+    color: #ffffff;
+    font-size: 2.5em;
+    text-align: center;
+    border-radius: 30px;
+}
+
+
+.card-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    width: 60%;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #F5501D; /* تم تغيير الخلفية إلى البرتقالي */
+    color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.card h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1em;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.product-description {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.product-image img {
+    max-width: 100%;
+    justify-items: center;
+    border-radius: 14px;
+}
+
+.product-details {
+    flex: 1;
+    padding: 20px;
+}
+
+
+.price {
+    color: #F5501D;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.description {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+}
+
+.features li {
+    background-color: #062170;
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #F5501D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    background-color: #e44c0d;
+}
+
+.actions {
+    margin-top: 20px;
+}
